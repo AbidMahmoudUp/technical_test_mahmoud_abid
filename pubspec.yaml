@@ -73,11 +73,12 @@ flutter:
         - asset: assets/fonts/CormorantGaramond-LightItalic.ttf
           weight: 300
           style: italic
-    # Uncomment once SuisseIntl-Regular.ttf is in assets/fonts/.
-    # - family: Suisse Intl
-    #   fonts:
-    #     - asset: assets/fonts/SuisseIntl-Regular.ttf
-    #       weight: 400
+    - family: Suisse Intl
+      fonts:
+        - asset: assets/fonts/SuisseIntl-Regular.otf
+          weight: 400
+        - asset: assets/fonts/SuisseIntl-Medium.otf
+          weight: 500
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
