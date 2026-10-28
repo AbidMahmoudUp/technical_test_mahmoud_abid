@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:technical_test_mahmoud_abid/app.dart';
+import 'package:technical_test_mahmoud_abid/core/routing/app_routes.dart';
 
 void main() {
   Future<void> pumpApp(WidgetTester tester) async {
@@ -39,5 +40,24 @@ void main() {
     await tapText(tester, 'Former smoker');
     await tapText(tester, 'Continue');
     expect(find.text('Former smoker'), findsOneWidget);
+  });
+
+  testWidgets('Ring setup and guide finish on the tips', (tester) async {
+    await pumpApp(tester);
+
+    tester.state<NavigatorState>(find.byType(Navigator)).pushNamed(
+      AppRoutes.ringStart,
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Let’s start'), findsOneWidget);
+
+    await tapText(tester, 'Connect your ring');
+    await tapText(tester, 'Continue');
+    expect(find.text('Open your app\nto sync'), findsOneWidget);
+
+    await tapText(tester, 'Continue');
+    await tapText(tester, 'Continue');
+    await tapText(tester, 'Start using Velia');
+    expect(find.text('Most powerful tips'), findsOneWidget);
   });
 }
