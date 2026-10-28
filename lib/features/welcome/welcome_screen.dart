@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                   AppButton.secondary(
                     label: 'Create account',
                     onPressed: () =>
-                        Navigator.pushNamed(context, AppRoutes.register),
+                        Navigator.pushNamed(context, AppRoutes.registerEmail),
                   ),
                 ],
               ),

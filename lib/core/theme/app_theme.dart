@@ -9,6 +9,7 @@ abstract final class AppTheme {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.background,
     fontFamily: AppTextStyles.sans,
+    fontFamilyFallback: const ['Inter'],
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
