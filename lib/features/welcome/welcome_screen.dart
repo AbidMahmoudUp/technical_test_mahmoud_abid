@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/routing/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../shared/widgets/app_button.dart';
+import '../register/providers/register_provider.dart';
 import 'widgets/brand_header.dart';
 import 'widgets/welcome_background.dart';
 
@@ -44,8 +46,10 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   AppButton.secondary(
                     label: 'Create account',
-                    onPressed: () =>
-                        Navigator.pushNamed(context, AppRoutes.registerEmail),
+                    onPressed: () {
+                      context.read<RegisterProvider>().reset();
+                      Navigator.pushNamed(context, AppRoutes.registerEmail);
+                    },
                   ),
                 ],
               ),
