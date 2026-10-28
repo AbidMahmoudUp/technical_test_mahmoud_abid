@@ -12,6 +12,11 @@ void main() {
     await tester.pumpWidget(const VeliaApp());
   }
 
+  Future<void> typeInto(WidgetTester tester, Finder field, String text) async {
+    await tester.enterText(field, text);
+    await tester.pump();
+  }
+
   Future<void> tapText(WidgetTester tester, String text) async {
     await tester.tap(find.text(text).last);
     await tester.pumpAndSettle();
@@ -58,6 +63,42 @@ void main() {
     await tapText(tester, 'Continue');
     await tapText(tester, 'Continue');
     await tapText(tester, 'Start using Velia');
+    expect(find.text('Most powerful tips'), findsOneWidget);
+  });
+
+  testWidgets('Create account runs register and ring onboarding to the tips', (
+    tester,
+  ) async {
+    await pumpApp(tester);
+
+    await tapText(tester, 'Create account');
+    expect(find.text('Let’s get started'), findsOneWidget);
+    await typeInto(tester, find.byType(TextField), 'jane@velia.com');
+    await tapText(tester, 'Continue');
+
+    expect(find.text('Set up a password'), findsOneWidget);
+    await typeInto(tester, find.byType(TextField).first, 'Velia#2026');
+    await typeInto(tester, find.byType(TextField).last, 'Velia#2026');
+    await tapText(tester, 'Continue');
+
+    expect(find.text('What is your date of birth?'), findsOneWidget);
+    final dateFields = find.byType(TextField);
+    await typeInto(tester, dateFields.at(0), '17');
+    await typeInto(tester, dateFields.at(1), '08');
+    await typeInto(tester, dateFields.at(2), '1990');
+    await tapText(tester, 'Continue');
+
+    expect(find.text('What is your height?'), findsOneWidget);
+    await tapText(tester, 'Continue');
+
+    expect(find.text('Let’s start'), findsOneWidget);
+    await tapText(tester, 'Connect your ring');
+    await tapText(tester, 'Continue');
+    while (find.text('Most powerful tips').evaluate().isEmpty) {
+      await tester.tap(find.byType(TextButton).last);
+      await tester.pumpAndSettle();
+    }
+
     expect(find.text('Most powerful tips'), findsOneWidget);
   });
 }
