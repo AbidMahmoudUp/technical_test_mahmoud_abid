@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import 'core/routing/app_routes.dart';
 import 'core/theme/app_theme.dart';
+import 'features/register/providers/register_provider.dart';
+import 'features/register/register_routes.dart';
 import 'features/ring/providers/ring_onboarding_provider.dart';
 import 'features/ring/ring_routes.dart';
 import 'features/tips/providers/lifestyle_provider.dart';
@@ -19,6 +21,7 @@ class VeliaApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => TipsProvider()),
         ChangeNotifierProvider(create: (_) => LifestyleProvider()),
+        ChangeNotifierProvider(create: (_) => RegisterProvider()),
         ChangeNotifierProvider(create: (_) => RingOnboardingProvider()),
       ],
       child: MaterialApp(
@@ -29,6 +32,7 @@ class VeliaApp extends StatelessWidget {
         routes: {
           AppRoutes.welcome: (_) => const WelcomeScreen(),
           ...tipsRoutes,
+          ...registerRoutes,
           ...ringRoutes,
         },
       ),
