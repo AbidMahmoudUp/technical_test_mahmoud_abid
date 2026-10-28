@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'core/routing/app_routes.dart';
 import 'core/theme/app_theme.dart';
+import 'features/tips/providers/lifestyle_provider.dart';
+import 'features/tips/providers/tips_provider.dart';
+import 'features/tips/tips_routes.dart';
 import 'features/welcome/welcome_screen.dart';
 
 class VeliaApp extends StatelessWidget {
@@ -9,14 +13,21 @@ class VeliaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Velia',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark,
-      initialRoute: AppRoutes.welcome,
-      routes: {
-        AppRoutes.welcome: (_) => const WelcomeScreen(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TipsProvider()),
+        ChangeNotifierProvider(create: (_) => LifestyleProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Velia',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.dark,
+        initialRoute: AppRoutes.welcome,
+        routes: {
+          AppRoutes.welcome: (_) => const WelcomeScreen(),
+          ...tipsRoutes,
+        },
+      ),
     );
   }
 }

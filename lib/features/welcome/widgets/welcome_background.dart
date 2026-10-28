@@ -20,7 +20,7 @@ class WelcomeBackground extends StatelessWidget {
           height: _imageSize,
           child: Image.asset(AppAssets.welcomeBackground, fit: BoxFit.cover),
         ),
-        const Positioned(
+        Positioned(
           top: -4,
           left: 0,
           right: 0,
@@ -30,8 +30,11 @@ class WelcomeBackground extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.6, 0.95],
-                colors: [Color(0x00091122), AppColors.background],
+                stops: const [0.6, 0.95],
+                colors: [
+                  AppColors.background.withValues(alpha: 0),
+                  AppColors.background,
+                ],
               ),
             ),
           ),

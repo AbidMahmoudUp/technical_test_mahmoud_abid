@@ -79,6 +79,13 @@ flutter:
           weight: 400
         - asset: assets/fonts/SuisseIntl-Medium.otf
           weight: 500
+    # Fallback for glyphs missing from the Suisse trial files (digits, "?").
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
